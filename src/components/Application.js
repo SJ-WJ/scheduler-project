@@ -5,30 +5,30 @@ import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointment";
 
-// const days = [
-//   {
-//     id: 1,
-//     name: "Monday",
-//     spots: 2,
-//   },
-//   {
-//     id: 2,
-//     name: "Tuesday",
-//     spots: 5,
-//   },
-//   {
-//     id: 3,
-//     name: "Wednesday",
-//     spots: 0,
-//   },
-// ];
-const [days, setDays] = useState([]);
-useEffect(() => {
-  const daysDataURL = `http:localhost:8001/api/days`;
-  axios.get(daysDataURL).then(response => {
-    console.log(response);
-  });
-}, [])
+const days = [
+  {
+    id: 1,
+    name: "Monday",
+    spots: 2,
+  },
+  {
+    id: 2,
+    name: "Tuesday",
+    spots: 5,
+  },
+  {
+    id: 3,
+    name: "Wednesday",
+    spots: 0,
+  },
+];
+// const [days, setDays] = useState([]);
+// useEffect(() => {
+//   const daysDataURL = `http:localhost:8001/api/days`;
+//   axios.get(daysDataURL).then(response => {
+//     setDays(...[response.data]);
+//   });
+// }, [])
 
 const appointments = {
   "1": {
