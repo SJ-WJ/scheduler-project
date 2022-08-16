@@ -1,6 +1,5 @@
-export default function getAppointmentsForDay(state, day) {
+export function getAppointmentsForDay(state, day) {
   const appointmentInfo = [];
-  console.log("state", state);
   for (const date of state.days) {
     if (date.name === day) {
       console.log("date", date);
@@ -13,4 +12,17 @@ export default function getAppointmentsForDay(state, day) {
   }
 
   return appointmentInfo;
+};
+
+export function getInterview(state, interview) {
+  const interviewInfo = {};
+  console.log("state", state);
+  console.log("interview", interview);
+  if(interview) {
+    interviewInfo["student"] = interview.student;
+    interviewInfo["interviewer"] = state.interviewers[interview.interviewer]
+  } else {
+    return null;
+  }
+  return interviewInfo;
 }
