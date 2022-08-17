@@ -11,15 +11,25 @@ export function getAppointmentsForDay(state, day) {
   }
 
   return appointmentInfo;
-};
+}
 
 export function getInterview(state, interview) {
   const interviewInfo = {};
-  if(interview) {
+  if (interview) {
     interviewInfo["student"] = interview.student;
-    interviewInfo["interviewer"] = state.interviewers[interview.interviewer]
+    interviewInfo["interviewer"] = state.interviewers[interview.interviewer];
   } else {
     return null;
   }
   return interviewInfo;
+}
+
+export function getInterviewersForDay(state, day) {
+
+  const currentDay = state.days.find((date) => date.name === day);
+  if (currentDay) {
+    return currentDay.interviewers.map((id) => state.interviewers[id]);
+  }
+
+  return [];
 }
