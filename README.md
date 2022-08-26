@@ -4,12 +4,16 @@ A React application where users can book appointments with an interviewer from M
 
 ## Screenhots of Interview Scheduler Project
 
+Interview Scheduler Main Page
 !["Interview Scheduler Main Page"](https://github.com/SJ-WJ/scheduler-project/blob/master/docs/main-page.png)
 
+Creating an Appointment
 !["Creating an Appointment"](https://github.com/SJ-WJ/scheduler-project/blob/master/docs/create-appointment.png)
 
+Error Handling when Creating an Appointment
 !["Error Handling when Creating an Appointment"](https://github.com/SJ-WJ/scheduler-project/blob/master/docs/error-handling.png)
 
+Deleting an Appointment
 !["Deleting an Appointment"](https://github.com/SJ-WJ/scheduler-project/blob/master/docs/delete-handling.png)
 
 ## Getting Started
