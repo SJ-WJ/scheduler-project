@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function useApplicationData() {
@@ -8,6 +8,37 @@ export default function useApplicationData() {
     appointments: {},
     interviewers: {},
   });
+
+  const openSpots = (state) => {
+    const today = state.days.find((day) => day.name === state.day);
+    const appointmentId = today.appointments;
+    const spots = appointmentId.filter(
+      (id) => state.appointments[id].interview === null
+    ).length;
+
+    return spots;
+  };
+
+  const updateOpenSpots = (state) => {
+    const today = state.days.find((day) => day.name === state.day);
+    const dayIndex = state.days.findIndex((day) => day.name === state.day);
+    const updateSpots = { ...today };
+    updateSpots.spots = openSpots(state);
+
+    const updatedDayArr = [...state.days];
+    updatedDayArr[dayIndex] = updateSpots;
+
+    const updateState = { ...state };
+    updateState.days = updatedDayArr;
+
+    setState({
+      ...state,
+      appointments: updateState.appointments,
+      days: updatedDayArr,
+    });
+
+    return state;
+  };
 
   function bookInterview(id, interview) {
     const appointment = {
@@ -20,12 +51,13 @@ export default function useApplicationData() {
       [id]: appointment,
     };
 
-    setState({
-      ...state,
-      appointments,
+    return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
+      setState({
+        ...state,
+        appointments,
+      });
+      updateOpenSpots({ ...state, appointments });
     });
-
-    return axios.put(`/api/appointments/${id}`, { interview });
   }
 
   function deleteInterview(id, interview) {
@@ -44,11 +76,11 @@ export default function useApplicationData() {
         ...state,
         appointments,
       });
+      updateOpenSpots({ ...state, appointments });
     });
   }
 
   const setDay = (day) => setState({ ...state, day });
-  const setDays = (days) => setState((prev) => ({ ...prev, days }));
 
   useEffect(() => {
     const daysDataURL = `/api/days`;
